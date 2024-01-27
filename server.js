@@ -19,7 +19,11 @@ dotenv.config();
 const app = express();
 
 //middlewares
-app.use(cors());
+app.use(cors(
+  {
+    origin : ['http://localhost:5000','https://forever-pos-z.onrender.com']
+  }
+));
 app.use(express.json());
 
 app.use(bodyParser.json());
