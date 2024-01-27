@@ -30,6 +30,11 @@ export const rootReducer = (state = initialState, action) => {
             ...state,
             cartItems: state.cartItems.filter((product) => product._id !== action.payload._id),
         };
+        case 'INITIALIZE_CART':
+            return {
+                ...state,
+                cartItems : []
+            }
         default: return state;
     }
 }

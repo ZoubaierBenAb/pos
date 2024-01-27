@@ -18,7 +18,7 @@ const Products = () => {
       dispatch({
         type: "SHOW_LOADING",
       });
-      const {data} = await axios.get('/api/products/getproducts');
+      const {data} = await axios.get('http://localhost:5000/api/products/getproducts');
       setProductData(data);
       dispatch({
         type: "HIDE_LOADING",
@@ -93,7 +93,7 @@ const Products = () => {
         dispatch({
           type: "SHOW_LOADING",
         });
-        const res = await axios.post('/api/products/addproducts', value);
+        const res = await axios.post('http://localhost:3001/api/products/addproducts', value);
         message.success("Product Added Successfully!")
         getAllProducts();
         setPopModal(false);
