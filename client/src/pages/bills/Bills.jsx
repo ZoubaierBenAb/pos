@@ -38,7 +38,7 @@ const Bills = () => {
 
   useEffect(() => {
     const handletodaysBills = async () => {
-      const { data } = await axios.get("https://forever-pos-zz.onrender.com/api/products/getproducts");
+      const { data } = await axios.get("https://forever-pos-zz.onrender.com/api/bills/getTodaysBills");
       setTodaysBills(data.todaySubTotal);
       console.log("data", todaysBills);
     };

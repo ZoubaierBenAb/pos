@@ -119,7 +119,7 @@ const Home = () => {
           type: "SHOW_LOADING",
         });
         const { data } = await axios.get(
-          "https://forever-pos-zz.onrender.com/api/bills/getTodaysBills"
+          "https://forever-pos-zz.onrender.com/api/products/getProducts"
         );
         setProductData(data);
         dispatch({
