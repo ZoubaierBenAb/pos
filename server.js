@@ -20,9 +20,7 @@ const app = express();
 
 //middlewares
 app.use(cors(
-  {
-    origin : ['http://localhost:5000','https://forever-pos-z.onrender.com']
-  }
+  
 ));
 app.use(express.json());
 
