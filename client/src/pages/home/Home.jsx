@@ -65,7 +65,7 @@ const Home = () => {
       imageUrl : 'https://i.ytimg.com/vi/0P7jm2i-krI/maxresdefault.jpg',
     },
     {
-      name : 'Boissons',
+      name : 'Boisson',
       imageUrl : 'https://www.clearwatersystems.com/wp-content/uploads/2019/03/Soda-Bottled-Tap-805x503-1.png'
     },
     {

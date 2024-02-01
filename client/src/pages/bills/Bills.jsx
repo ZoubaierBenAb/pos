@@ -141,13 +141,13 @@ const Bills = () => {
                     {selectedBill.cartItems.map((product, index) => (
                       <tr className="service" key={index}>
                         <td className="tableitem">
-                          <p className="itemtext">{product.category} {product.name}</p>
+                          <h2 className="itemtext">{product.category} {product.name}</h2>
                         </td>
                         <td className="tableitem">
-                          <p className="itemtext">{product.quantity}</p>
+                          <h2 className="itemtext">{product.quantity}</h2>
                         </td>
                         <td className="tableitem">
-                          <p className="itemtext">{`${product.quantity * product.price.toFixed(2)}Dt`}</p>
+                          <h2 className="itemtext">{`${product.quantity * product.price.toFixed(2)}Dt`}</h2>
                         </td>
                       </tr>
                     ))}
