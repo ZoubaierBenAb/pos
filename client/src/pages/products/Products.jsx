@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import LayoutApp from "../../components/Layout";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined,SearchOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Modal, Select, Table, message } from "antd";
 import FormItem from "antd/lib/form/FormItem";
 
@@ -40,6 +40,13 @@ const Products = () => {
   const [productData, setProductData] = useState([]);
   const [popModal, setPopModal] = useState(false);
   const [editProduct, setEditProduct] = useState(false);
+  const [searchText, setSearchText] = useState('');
+  const handleSearch = (value) => {
+    setSearchText(value);
+  };
+  const filteredProductData = productData.filter(product =>
+    product.name.toLowerCase().includes(searchText.toLowerCase())
+  );
 
   const getAllProducts = async () => {
     try {
@@ -191,10 +198,16 @@ const Products = () => {
   return (
     <LayoutApp>
       <h2>All Products </h2>
+      <Input
+        prefix={<SearchOutlined />}
+        placeholder="Search by Name"
+        onChange={(e) => handleSearch(e.target.value)}
+        style={{ marginBottom: 16, width: 200 }}
+      />
       <Button className="add-new" onClick={() => setPopModal(true)}>
         Add New
       </Button>
-      <Table dataSource={productData} columns={columns} bordered />
+      <Table dataSource={filteredProductData} columns={columns} bordered />
 
       {popModal && (
         <Modal
