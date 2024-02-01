@@ -71,7 +71,7 @@ const Products = () => {
       dispatch({
         type: "SHOW_LOADING",
       });
-      await axios.post("/api/products/deleteproducts", {
+      await axios.post("https://forever-pos-zz.onrender.com/api/products/deleteproducts", {
         productId: record._id,
       });
       message.success("Product Deleted Successfully!");
@@ -155,7 +155,7 @@ const Products = () => {
         dispatch({
           type: "SHOW_LOADING",
         });
-        await axios.put("/api/products/updateproducts", {
+        await axios.put("https://forever-pos-zz.onrender.com/api/products/updateproducts", {
           ...value,
           productId: editProduct._id,
         });
