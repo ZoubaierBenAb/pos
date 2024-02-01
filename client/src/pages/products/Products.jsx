@@ -68,15 +68,26 @@ const Products = () => {
 
   const handlerDelete = async (record) => {
     try {
+      // Display a confirmation alert
+      const confirmDelete = window.confirm("Are you sure you want to delete this product?");
+      
+      if (!confirmDelete) {
+        return; // If the user cancels the deletion, do nothing
+      }
+  
       dispatch({
         type: "SHOW_LOADING",
       });
+  
       await axios.post("https://forever-pos-zz.onrender.com/api/products/deleteproducts", {
         productId: record._id,
       });
+  
       message.success("Product Deleted Successfully!");
+  
       getAllProducts();
       setPopModal(false);
+  
       dispatch({
         type: "HIDE_LOADING",
       });
@@ -84,10 +95,12 @@ const Products = () => {
       dispatch({
         type: "HIDE_LOADING",
       });
+  
       message.error("Error!");
       console.log(error);
     }
   };
+  
 
   const columns = [
     {
