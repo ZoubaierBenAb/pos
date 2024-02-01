@@ -15,14 +15,14 @@ const Bills = () => {
   const [selectedBill, setSelectedBill] = useState(null);
   const [todaysBills, setTodaysBills] = useState(null);
 
-
-
   const getAllBills = async () => {
     try {
       dispatch({
         type: "SHOW_LOADING",
       });
-      const { data } = await axios.get("https://forever-pos-zz.onrender.com/api/bills/getbills");
+      const { data } = await axios.get(
+        "https://forever-pos-zz.onrender.com/api/bills/getbills"
+      );
       setBillsData(data);
       dispatch({
         type: "HIDE_LOADING",
@@ -38,12 +38,14 @@ const Bills = () => {
 
   useEffect(() => {
     const handletodaysBills = async () => {
-      const { data } = await axios.get("https://forever-pos-zz.onrender.com/api/bills/getTodaysBills");
+      const { data } = await axios.get(
+        "https://forever-pos-zz.onrender.com/api/bills/getTodaysBills"
+      );
       setTodaysBills(data.todaySubTotal);
       console.log("data", todaysBills);
     };
 
-    handletodaysBills()
+    handletodaysBills();
     getAllBills();
   }, []);
 
@@ -79,7 +81,6 @@ const Bills = () => {
     content: () => componentRef.current,
   });
 
-  
   const date = new Date();
   const hours = date.getHours();
   const minutes = date.getMinutes();
@@ -125,13 +126,13 @@ const Bills = () => {
                 <table>
                   <thead>
                     <tr className="tabletitle">
-                      <td className="item">
-                        <h2>article</h2>
+                      <td className="item" style={{ width: "60%" }}>
+                        <h2>Article</h2>
                       </td>
-                      <td className="Hours">
+                      <td className="Hours" style={{ width: "20%" }}>
                         <h2>Qté</h2>
                       </td>
-                      <td className="Rate">
+                      <td className="Rate" style={{ width: "20%" }}>
                         <h2>Total</h2>
                       </td>
                     </tr>
@@ -141,13 +142,17 @@ const Bills = () => {
                     {selectedBill.cartItems.map((product, index) => (
                       <tr className="service" key={index}>
                         <td className="tableitem">
-                          <h2 className="itemtext">{product.category} {product.name}</h2>
+                          <b className="itemtext">
+                            {product.category} {product.name}
+                          </b>
                         </td>
                         <td className="tableitem">
-                          <h2 className="itemtext">{product.quantity}</h2>
+                          <b className="itemtext">{product.quantity}</b>
                         </td>
                         <td className="tableitem">
-                          <h2 className="itemtext">{`${product.quantity * product.price.toFixed(2)}Dt`}</h2>
+                          <b className="itemtext">{`${
+                            product.quantity * product.price.toFixed(2)
+                          }Dt`}</b>
                         </td>
                       </tr>
                     ))}
@@ -176,7 +181,9 @@ const Bills = () => {
           </div>
         </Modal>
       )}
-<span style={{textDecoration : 'underline',fontSize:'25px'}}>Recette de jour: {todaysBills}Dt</span>
+      <span style={{ textDecoration: "underline", fontSize: "25px" }}>
+        Recette de jour: {todaysBills}Dt
+      </span>
     </Layout>
   );
 };

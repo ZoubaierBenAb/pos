@@ -13,8 +13,8 @@ export const insertProdcuts = async()=>{
 
 export const updateProductsKey = async () => {
    try {
-     const filter = { 'category' : 'Plats'};
-     const update = { $set: { 'category': 'Plat' } };
+     const filter = { 'image' : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMHYPixNR-EyXiYuKQKys2AUiwQJVicM3IZw&usqp=CAU'};
+     const update = { $set: { 'image': 'https://www.sourcedupays.com/wp-content/uploads/2018/08/famille-bouteilles-source-du-pays-2.png' } };
  
      const result = await Product.updateMany(filter, update);
      console.log(result);

@@ -53,7 +53,7 @@ const Home = () => {
       imageUrl : 'https://static.vecteezy.com/system/resources/previews/003/485/068/original/logo-word-cocktail-stylized-as-trendy-drinks-vector.jpg'
     },
     {
-      name : 'Crepes Sucrée',
+      name : 'Crêpe sucrée',
       imageUrl : 'https://i.ytimg.com/vi/0P7jm2i-krI/maxresdefault.jpg'
     },
     {
@@ -61,7 +61,7 @@ const Home = () => {
       imageUrl : 'https://i.pinimg.com/736x/cb/07/e8/cb07e804dfcfbe58218c8ee5f373fdaf.jpg'
     },
     {
-      name : 'Crepe Salée',
+      name : 'Crêpe Salée',
       imageUrl : 'https://i.ytimg.com/vi/0P7jm2i-krI/maxresdefault.jpg',
     },
     {
