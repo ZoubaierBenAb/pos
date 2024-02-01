@@ -9,7 +9,7 @@ import userRouter from "./routes/userRoutes.js";
 import billsRouter from "./routes/billsRoutes.js";
 import products from "./utils/data.js";
 import Product from "./models/productModel.js";
-import { insertProdcuts } from "./utils/insert.js";
+import { categoryKeys, insertProdcuts ,updateProductsKey} from "./utils/insert.js";
 //require('colors');
 
 dotenv.config();
@@ -42,7 +42,7 @@ mongoose
     "mongodb+srv://zoubaierbenab9779:0Lq8WxKRSPhKTJix@cluster0.gqsuijp.mongodb.net/"
   )
   .then(() => {
-  
+
     app.listen(PORT, () => {
       console.log(`Server is running on the port: http://localhost:${PORT}`);
     });

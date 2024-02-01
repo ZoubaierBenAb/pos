@@ -121,37 +121,48 @@ const Bills = () => {
             </div>
             <div className="cardFooter">
               <h4>Votre Ordre</h4>
-              {selectedBill.cartItems.map((product) => (
-                <>
-                  <div className="footerCard">
-                    <div className="group">
-                      <span>Produits:</span>
-                      <span>
-                        <b>{product.name}</b>
-                      </span>
-                    </div>
-                    <div className="group">
-                      <span>Qté:</span>
-                      <span>
-                        <b>{product.quantity}</b>
-                      </span>
-                    </div>
-                    <div className="group">
-                      <span>Prix:</span>
-                      <span>
-                        <b>{product.price}Dt</b>
-                      </span>
-                    </div>
-                  </div>
-                </>
-              ))}
-              <div className="footerCardTotal">
-                <div className="group">
-                  <h3>Total:</h3>
-                  <h3>
-                    <b>{selectedBill.subTotal}Dt</b>
-                  </h3>
-                </div>
+              <div id="table">
+                <table>
+                  <thead>
+                    <tr className="tabletitle">
+                      <td className="item">
+                        <h2>article</h2>
+                      </td>
+                      <td className="Hours">
+                        <h2>Qté</h2>
+                      </td>
+                      <td className="Rate">
+                        <h2>Total</h2>
+                      </td>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {selectedBill.cartItems.map((product, index) => (
+                      <tr className="service" key={index}>
+                        <td className="tableitem">
+                          <p className="itemtext">{product.category} {product.name}</p>
+                        </td>
+                        <td className="tableitem">
+                          <p className="itemtext">{product.quantity}</p>
+                        </td>
+                        <td className="tableitem">
+                          <p className="itemtext">{`${product.quantity * product.price.toFixed(2)}Dt`}</p>
+                        </td>
+                      </tr>
+                    ))}
+
+                    <tr className="tabletitle">
+                      <td></td>
+                      <td className="Rate">
+                        <h2>Total</h2>
+                      </td>
+                      <td className="payment">
+                        <h2>{`${selectedBill.subTotal.toFixed(2)}Dt`}</h2>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
               <div className="footerThanks">
                 <span>{"Merci :)"}</span>

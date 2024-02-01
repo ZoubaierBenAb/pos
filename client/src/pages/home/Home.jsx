@@ -78,7 +78,7 @@ const Home = () => {
     },
     {
       name : 'Gateau',
-      imageUrl : 'https://lh3.googleusercontent.com/proxy/iJYP4uBr3CQWVeUtBfOfM-Xlom67awBaz2y4X19ww3HX2oYDlw67p_KOnT0_RIcv6fuiNAGplFHbAr0DmIWFX5GD8udkbzGM6bYwWI21WNI'
+      imageUrl : 'https://lh3.googleusercontent.com/proxy/cPkGALNWMDgWQ8jWypzroxjLqLhIbp74QFQSo4SPmYNSyfsLs9Br-J_V3NJUKfYV_oCEqS8h6zS74xR2N6QEtS_McNGf1MY0J4hLfbDqbj4'
     },
     {
       name : 'Croissant',
@@ -97,7 +97,7 @@ const Home = () => {
       imageUrl : 'https://www.olivetomato.com/wp-content/uploads/2016/02/SAM4952-1.jpg'
     },
     {
-      name : 'Burgers',
+      name : 'Burger',
       imageUrl : 'https://previews.123rf.com/images/tatty85nati/tatty85nati1708/tatty85nati170800088/83588185-burger-and-black-word-hamburger.jpg'
     },
     {
@@ -107,7 +107,17 @@ const Home = () => {
     {
       name : 'Pizza',
       imageUrl :'https://tastesbetterfromscratch.com/wp-content/uploads/2023/06/Pepperoni-Pizza-1.jpg'
-    }
+    },
+    {name : 'Chicha',
+  imageUrl : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ_izuwna4Fb1-LsPNiHFmoRlIwLYYaqa96GAINfnnPA&s'
+  },
+  {name : 'Panini',
+imageUrl : 'https://delitraiteur.lu/wp-content/uploads/2022/02/panini-1.png'
+},
+{
+  name : 'Plat',
+  imageUrl :'https://cdn.chefclub.tools/uploads/recipes/cover-thumbnail/fdb607b8-98ad-441b-9a63-e5d2ba83b656.jpg'
+}
   
 
   ];

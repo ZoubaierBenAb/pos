@@ -2,89 +2,76 @@
 //This time I will show you how to manually enter a file in DB, I will not create a seed file
 const products = [
   {
-    name: "Margherita",
-    category: "Pizza",
-    price: 10,
-    image:
-      "https://tastesbetterfromscratch.com/wp-content/uploads/2023/06/Pepperoni-Pizza-1.jpg",
+    category : 'Chicha',
+    name :'Menthe',
+    price : 0,
+   image :  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ_izuwna4Fb1-LsPNiHFmoRlIwLYYaqa96GAINfnnPA&s',
+
   },
   {
-    name: "Neptune",
-    category: "Pizza",
-    price: 13,
-    image:
-      "https://tastesbetterfromscratch.com/wp-content/uploads/2023/06/Pepperoni-Pizza-1.jpg",
+    category : 'Chicha',
+    name :'Pomme',
+    price : 5,
+   image :  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ_izuwna4Fb1-LsPNiHFmoRlIwLYYaqa96GAINfnnPA&s',
+   
   },
   {
-    name: "Champignon",
-    category: "Pizza",
-    price: 13,
-    image:
-      "https://tastesbetterfromscratch.com/wp-content/uploads/2023/06/Pepperoni-Pizza-1.jpg",
+    category : 'Chicha',
+    name :'Love',
+    price : 6,
+   image :  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ_izuwna4Fb1-LsPNiHFmoRlIwLYYaqa96GAINfnnPA&s',
+   
   },
   {
-    name: "Mamamiya",
-    category: "Pizza",
-    price: 16,
-    image:
-      "https://tastesbetterfromscratch.com/wp-content/uploads/2023/06/Pepperoni-Pizza-1.jpg",
+    category : 'Chicha',
+    name :'Raisin',
+    price : 0,
+   image :  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ_izuwna4Fb1-LsPNiHFmoRlIwLYYaqa96GAINfnnPA&s',
+   
   },
   {
-    name: "4 Fromages",
-    category: "Pizza",
-    price: 17,
-    image:
-      "https://tastesbetterfromscratch.com/wp-content/uploads/2023/06/Pepperoni-Pizza-1.jpg",
+    category : 'Chicha',
+    name :'Chewing-gum',
+    price : 0,
+   image :  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ_izuwna4Fb1-LsPNiHFmoRlIwLYYaqa96GAINfnnPA&s',
+   
   },
   {
-    name: "4 Saisons",
-    category: "Pizza",
-    price: 18,
-    image:
-      "https://tastesbetterfromscratch.com/wp-content/uploads/2023/06/Pepperoni-Pizza-1.jpg",
+    category : 'Panini',
+    name :'Salami + Fromage',
+    price : 6,
+   image :  'https://delitraiteur.lu/wp-content/uploads/2022/02/panini-1.png',
+   
   },
   {
-    name: "Peperoni",
-    category: "Pizza",
-    price: 14,
-    image:
-      "https://tastesbetterfromscratch.com/wp-content/uploads/2023/06/Pepperoni-Pizza-1.jpg",
+    category : 'Panini',
+    name :'Jambon + Fromage',
+    price : 7,
+   image :  'https://delitraiteur.lu/wp-content/uploads/2022/02/panini-1.png',
+   
   },
   {
-    name: "Escalope",
-    category: "Pizza",
-    price: 16,
-    image:
-      "https://tastesbetterfromscratch.com/wp-content/uploads/2023/06/Pepperoni-Pizza-1.jpg",
+    category : 'Panini',
+    name :'Thon + Fromage',
+    price : 7,
+   image :  'https://delitraiteur.lu/wp-content/uploads/2022/02/panini-1.png',
+   
   },
   {
-    name: "Viande Hachée",
-    category: "Pizza",
-    price: 19,
-    image:
-      "https://tastesbetterfromscratch.com/wp-content/uploads/2023/06/Pepperoni-Pizza-1.jpg",
+    category : 'Panini',
+    name :'Poulet + Fromage',
+    price : 8.5,
+   image :  'https://delitraiteur.lu/wp-content/uploads/2022/02/panini-1.png',
+   
   },
   {
-    name: "Toke",
-    category: "Pizza",
-    price: 24,
-    image:
-      "https://tastesbetterfromscratch.com/wp-content/uploads/2023/06/Pepperoni-Pizza-1.jpg",
+    category : 'Panini',
+    name :'Forever',
+    price : 9,
+   image :  'https://delitraiteur.lu/wp-content/uploads/2022/02/panini-1.png',
+   
   },
-  ,
-  {
-    name: "Forever",
-    category: "Pizza",
-    price: 25,
-    image: "https://tastesbetterfromscratch.com/wp-content/uploads/2023/06/Pepperoni-Pizza-1.jpg",
-  },
-  ,
-  {
-    name: "Fruits de mer",
-    category: "Pizza",
-    price: 27,
-    image: "https://tastesbetterfromscratch.com/wp-content/uploads/2023/06/Pepperoni-Pizza-1.jpg",
-  },
+  
   
 
 ];

@@ -1,13 +1,41 @@
-import axios from 'axios';
-import React, {useEffect, useState} from 'react'
-import { useDispatch } from 'react-redux';
-import LayoutApp from '../../components/Layout'
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { Button, Form, Input, Modal, Select, Table, message } from 'antd';
-import FormItem from 'antd/lib/form/FormItem';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import LayoutApp from "../../components/Layout";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Button, Form, Input, Modal, Select, Table, message } from "antd";
+import FormItem from "antd/lib/form/FormItem";
 
+const options = [
+  "Café",
+  "Thé",
+  "Jus",
+  "Glaces",
+  "Cocktail",
+  "Mojito",
+  "Smothie",
+  "Frappuchino",
+  "Milk Shake",
+  "Milk shake",
+  "Boisson",
+  "Crêpe sucrée",
+  "Petit Dejeuner",
+  "Crêpe Salée",
+  "Gauffre",
+  "Cheese Cake",
+  "Gateau",
+  "Cake",
+  "Croissant",
+  "Burger",
+  "Tacos",
+  "Plat",
+  "Baguette Farcie",
+  "Omelette",
+  "Pizza",
+  "Chicha",
+  "Panini",
+];
 const Products = () => {
-
   const dispatch = useDispatch();
   const [productData, setProductData] = useState([]);
   const [popModal, setPopModal] = useState(false);
@@ -18,14 +46,15 @@ const Products = () => {
       dispatch({
         type: "SHOW_LOADING",
       });
-      const {data} = await axios.get('https://forever-pos-zz.onrender.com/api/products/getproducts');
+      const { data } = await axios.get(
+        "https://forever-pos-zz.onrender.com/api/products/getproducts"
+      );
       setProductData(data);
       dispatch({
         type: "HIDE_LOADING",
       });
       console.log(data);
-
-    } catch(error) {
+    } catch (error) {
       dispatch({
         type: "HIDE_LOADING",
       });
@@ -34,7 +63,7 @@ const Products = () => {
   };
 
   useEffect(() => {
-      getAllProducts();
+    getAllProducts();
   }, []);
 
   const handlerDelete = async (record) => {
@@ -42,71 +71,83 @@ const Products = () => {
       dispatch({
         type: "SHOW_LOADING",
       });
-      await axios.post('/api/products/deleteproducts', {productId:record._id});
-      message.success("Product Deleted Successfully!")
+      await axios.post("/api/products/deleteproducts", {
+        productId: record._id,
+      });
+      message.success("Product Deleted Successfully!");
       getAllProducts();
       setPopModal(false);
       dispatch({
         type: "HIDE_LOADING",
       });
-      
-
-    } catch(error) {
+    } catch (error) {
       dispatch({
         type: "HIDE_LOADING",
       });
-      message.error("Error!")
+      message.error("Error!");
       console.log(error);
     }
-  }
+  };
 
   const columns = [
     {
-        title: "Name",
-        dataIndex: "name"
+      title: "Name",
+      dataIndex: "name",
     },
     {
-        title: "Image",
-        dataIndex: "image",
-        render:(image, record) => <img src={image} alt={record.name} height={60} width={60} />
-    }, 
-    {
-        title: "Price",
-        dataIndex: "price",
+      title: "Image",
+      dataIndex: "image",
+      render: (image, record) => (
+        <img src={image} alt={record.name} height={60} width={60} />
+      ),
     },
     {
-        title: "Action",
-        dataIndex: "_id",
-        render:(id, record) => 
+      title: "Price",
+      dataIndex: "price",
+    },
+    {
+      title: "Action",
+      dataIndex: "_id",
+      render: (id, record) => (
         <div>
-          <DeleteOutlined className='cart-action' onClick={() => handlerDelete(record)}/>
-          <EditOutlined className='cart-edit' onClick={() => {setEditProduct(record); setPopModal(true)}} />
+          <DeleteOutlined
+            className="cart-action"
+            onClick={() => handlerDelete(record)}
+          />
+          <EditOutlined
+            className="cart-edit"
+            onClick={() => {
+              setEditProduct(record);
+              setPopModal(true);
+            }}
+          />
         </div>
-        
-    }
-  ]
+      ),
+    },
+  ];
 
   const handlerSubmit = async (value) => {
     //console.log(value);
-    if(editProduct === null) {
+    if (editProduct === null) {
       try {
         dispatch({
           type: "SHOW_LOADING",
         });
-        const res = await axios.post('https://forever-pos-zz.onrender.com/api/products/addproducts', value);
-        message.success("Product Added Successfully!")
+        const res = await axios.post(
+          "https://forever-pos-zz.onrender.com/api/products/addproducts",
+          value
+        );
+        message.success("Product Added Successfully!");
         getAllProducts();
         setPopModal(false);
         dispatch({
           type: "HIDE_LOADING",
         });
-        
-  
-      } catch(error) {
+      } catch (error) {
         dispatch({
           type: "HIDE_LOADING",
         });
-        message.error("Error!")
+        message.error("Error!");
         console.log(error);
       }
     } else {
@@ -114,60 +155,77 @@ const Products = () => {
         dispatch({
           type: "SHOW_LOADING",
         });
-       await axios.put('/api/products/updateproducts', {...value, productId:editProduct._id});
-        message.success("Product Updated Successfully!")
+        await axios.put("/api/products/updateproducts", {
+          ...value,
+          productId: editProduct._id,
+        });
+        message.success("Product Updated Successfully!");
         getAllProducts();
         setPopModal(false);
         dispatch({
           type: "HIDE_LOADING",
         });
-        
-  
-      } catch(error) {
+      } catch (error) {
         dispatch({
           type: "HIDE_LOADING",
         });
-        message.error("Error!")
+        message.error("Error!");
         console.log(error);
       }
     }
-  }
+  };
 
   return (
     <LayoutApp>
       <h2>All Products </h2>
-      <Button className='add-new' onClick={() => setPopModal(true)}>Add New</Button>
+      <Button className="add-new" onClick={() => setPopModal(true)}>
+        Add New
+      </Button>
       <Table dataSource={productData} columns={columns} bordered />
-      
-      {
-        popModal && 
-        <Modal title={`${editProduct !== null ? "Edit Product" : "Add New Product"}`} visible={popModal} onCancel={() => {setEditProduct(null); setPopModal(false);}} footer={false}>
-          <Form layout='vertical' initialValues={editProduct} onFinish={handlerSubmit}>
+
+      {popModal && (
+        <Modal
+          title={`${editProduct !== null ? "Edit Product" : "Add New Product"}`}
+          visible={popModal}
+          onCancel={() => {
+            setEditProduct(null);
+            setPopModal(false);
+          }}
+          footer={false}
+        >
+          <Form
+            layout="vertical"
+            initialValues={editProduct}
+            onFinish={handlerSubmit}
+          >
             <FormItem name="name" label="Name">
-              <Input/>
+              <Input />
             </FormItem>
             <Form.Item name="category" label="Category">
               <Select>
-                <Select.Option value="pizzas">Pizzas</Select.Option>
-                <Select.Option value="burgers">Burgers</Select.Option>
-                <Select.Option value="drinks">Drinks</Select.Option>
+                {options.map((option) => (
+                  <Select.Option key={option} value={option}>
+                    {option}
+                  </Select.Option>
+                ))}
               </Select>
             </Form.Item>
             <FormItem name="price" label="Price">
-              <Input/>
+              <Input />
             </FormItem>
             <FormItem name="image" label="Image URL">
-              <Input/>
+              <Input />
             </FormItem>
             <div className="form-btn-add">
-              <Button htmlType='submit' className='add-new'>Add</Button>
+              <Button htmlType="submit" className="add-new">
+                Add
+              </Button>
             </div>
           </Form>
         </Modal>
-      }
-
+      )}
     </LayoutApp>
-  )
-}
+  );
+};
 
-export default Products
+export default Products;
