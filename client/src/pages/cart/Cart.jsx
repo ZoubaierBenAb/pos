@@ -2,13 +2,13 @@ import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import Layout from '../../components/Layout'
 import { DeleteOutlined, PlusCircleOutlined, MinusCircleOutlined } from '@ant-design/icons';
-import { Button, Form, message, Modal,Table } from 'antd';
+import { Button, Form, Input, message, Modal,Table } from 'antd';
 
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Cart = () => {
-
+    const [table,setTable]= useState(0)
     const [subTotal, setSubTotal] = useState(0);
     const [billPopUp, setBillPopUp] = useState(false);
 
@@ -94,6 +94,7 @@ const Cart = () => {
                 ...value,
                 cartItems,
                 subTotal,
+                table,
                 tax: Number(((subTotal / 100) * 10).toFixed(2)),
                 totalAmount: Number((Number(subTotal) + Number(((subTotal / 100) * 10).toFixed(2))).toFixed(2)),
                 userId: JSON.parse(localStorage.getItem("auth"))._id
@@ -110,6 +111,8 @@ const Cart = () => {
   return (
     <Layout>
       <h2>Cart</h2>
+      <Input onChange={(e)=>{setTable(e.target.value)}} placeholder='numero de table'>
+      </Input>
       <Table dataSource={cartItems} columns={columns} bordered />
       <div className="subTotal">
         <h2>Sub Total: <span>$ {(subTotal).toFixed(2)}</span></h2>

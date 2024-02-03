@@ -1,11 +1,42 @@
-import { Button, Modal, Table } from "antd";
+import { Button, Modal, Select, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
 
 import { useReactToPrint } from "react-to-print";
-import { EyeOutlined } from "@ant-design/icons";
+import { EyeOutlined, EditOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import Layout from "../../components/Layout";
+
+
+const options = [
+  "Café",
+  "Thé",
+  "Jus",
+  "Glaces",
+  "Cocktail",
+  "Mojito",
+  "Smothie",
+  "Frappuchino",
+  "Milk Shake",
+  "Milk shake",
+  "Boisson",
+  "Crêpe sucrée",
+  "Petit Dejeuner",
+  "Crêpe Salée",
+  "Gauffre",
+  "Cheese Cake",
+  "Gateau",
+  "Cake",
+  "Croissant",
+  "Burger",
+  "Tacos",
+  "Plat",
+  "Baguette Farcie",
+  "Omelette",
+  "Pizza",
+  "Chicha",
+  "Panini",
+];
 
 const Bills = () => {
   const componentRef = useRef();
@@ -14,6 +45,9 @@ const Bills = () => {
   const [popModal, setPopModal] = useState(false);
   const [selectedBill, setSelectedBill] = useState(null);
   const [todaysBills, setTodaysBills] = useState(null);
+  const [popModifyModal, setPopModifyModal] = useState(false);
+  const [newItem,setNewItem] = useState(false)
+  const [selectedProduct,setSelectedProduct]= useState([])
 
   const getAllBills = async () => {
     try {
@@ -60,6 +94,26 @@ const Bills = () => {
       dataIndex: "subTotal",
     },
     {
+      title: "Table",
+      dataIndex: "table",
+    },
+    {
+      title: "Modify",
+      dataIndex: "_id",
+      render: (id, record) => (
+        <div>
+          <EditOutlined
+            className="cart-edit eye"
+            onClick={() => {
+              setSelectedBill(record);
+              setPopModifyModal(true);
+              console.log(selectedBill.cartItems)
+            }}
+          />
+        </div>
+      ),
+    },
+    {
       title: "Action",
       dataIndex: "_id",
       render: (id, record) => (
@@ -77,6 +131,31 @@ const Bills = () => {
     },
   ];
 
+  const ModifyColumns = [
+    {
+      title : 'Category',
+      dataIndex : 'category',
+    },
+    {
+      title : 'Product',
+      dataIndex : 'name'
+    }
+  ]
+
+  const handleSelectChange = async(value)=>{
+
+
+
+try {
+  const response = await axios.get(`https://forever-pos-zz.onrender.com/api/product/getSelectProducts/${value}`)
+
+  setSelectedProduct(response.data.data)
+  console.log(selectedProduct)
+} catch (error) {
+  console.log(error)
+}
+
+  }
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
@@ -181,6 +260,43 @@ const Bills = () => {
           </div>
         </Modal>
       )}
+      {
+        popModifyModal && (
+          <Modal
+          title=""
+          width={400}
+          pagination={false}
+          visible={popModifyModal}
+          onCancel={() => setPopModifyModal(false)}
+          footer={false}>
+
+
+      <Table dataSource={selectedBill.cartItems} columns={ModifyColumns} bordered />
+      <div style ={{display : 'flex', flexDirection: 'column'}}>
+      <Button onClick={()=>{setNewItem(true)}}>
+  Ajouter un autre Article
+</Button>
+{newItem && (
+
+<Select onChange={handleSelectChange}>
+{options.map((option) => (
+                  <Select.Option  key={option} value={option}>
+                    {option}
+                  </Select.Option>
+                ))}
+
+
+  </Select>
+)}
+
+        
+      </div>
+
+
+
+          </Modal>
+        )
+      }
       <span style={{ textDecoration: "underline", fontSize: "25px" }}>
         Recette de jour: {todaysBills}Dt
       </span>

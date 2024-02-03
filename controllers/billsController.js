@@ -64,8 +64,15 @@ export const getBillsCreatedToday = async (req,res)=>{
   console.log(error)  
  }
 
+}
 
-
-
+export const updateBill = async(req,res)=>{
+try {
+  await Bills.findOneAndUpdate({_id : req.body.billId}, req.body, {new: true})
+res.status(200).json({message : 'bill updated successfully'})
+} catch (error) {
+  res.status(400).send(error);
+  console.log(error);
+}
 
 }

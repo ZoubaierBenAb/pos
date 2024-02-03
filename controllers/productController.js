@@ -50,3 +50,17 @@ export const deleteProductController = async (req, res) => {
         console.log(error);
     }
 }
+
+export const getSelectProduct = async (req,res)=>{
+
+try {
+    const category = req.params.category
+    const products = await Product.find({category})
+
+    res.status(200).json({message : 'Products found successfully  ',data : products})
+} catch (error) {
+    console.log(error)
+}
+
+
+}
