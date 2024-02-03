@@ -144,10 +144,8 @@ const Bills = () => {
 
   const handleSelectChange = async(value)=>{
 
-
-
 try {
-  const response = await axios.get(`https://forever-pos-zz.onrender.com/api/product/getSelectProducts/${value}`)
+  const response = await axios.get(`https://forever-pos-zz.onrender.com/api/products/getSelectProducts/${value}`)
 
   setSelectedProduct(response.data.data)
   console.log(selectedProduct)
