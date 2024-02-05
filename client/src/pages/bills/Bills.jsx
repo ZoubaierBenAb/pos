@@ -7,7 +7,6 @@ import { EyeOutlined, EditOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import Layout from "../../components/Layout";
 
-
 const options = [
   "Café",
   "Thé",
@@ -46,8 +45,10 @@ const Bills = () => {
   const [selectedBill, setSelectedBill] = useState(null);
   const [todaysBills, setTodaysBills] = useState(null);
   const [popModifyModal, setPopModifyModal] = useState(false);
-  const [newItem,setNewItem] = useState(false)
-  const [selectedProduct,setSelectedProduct]= useState([])
+  const [productObject, setProductObject] = useState(null);
+  const [category, setCategory] = useState(null);
+  const [product, setProduct] = useState(null);
+  const [subTotal,setSubTotal]=useState(0)
 
   const getAllBills = async () => {
     try {
@@ -81,7 +82,7 @@ const Bills = () => {
 
     handletodaysBills();
     getAllBills();
-  }, []);
+  }, [selectedBill]);
 
   const columns = [
     {
@@ -107,7 +108,7 @@ const Bills = () => {
             onClick={() => {
               setSelectedBill(record);
               setPopModifyModal(true);
-              console.log(selectedBill.cartItems)
+              console.log(selectedBill.cartItems);
             }}
           />
         </div>
@@ -133,27 +134,50 @@ const Bills = () => {
 
   const ModifyColumns = [
     {
-      title : 'Category',
-      dataIndex : 'category',
+      title: "Category",
+      dataIndex: "category",
     },
     {
-      title : 'Product',
-      dataIndex : 'name'
+      title: "Product",
+      dataIndex: "name",
+    },
+  ];
+
+  const handleSelectChange = async (value) => {
+    try {
+      const category = value;
+      const response = await axios.get(
+        `https://forever-pos-zz.onrender.com/api/products/getSelectProducts/${category}`
+      );
+
+      setCategory(response.data.data);
+      console.log("products", response.data.data);
+    } catch (error) {
+      console.log(error);
     }
-  ]
+  };
 
-  const handleSelectChange = async(value)=>{
+  function filterByName(products, filterName) {
+    const filteredProduct = products.find((drink) =>
+      drink.name.toLowerCase().includes(filterName.toLowerCase())
+    
+    );
+    setProductObject(filteredProduct);
 
-try {
-  const response = await axios.get(`https://forever-pos-zz.onrender.com/api/products/getSelectProducts/${value}`)
-
-  setSelectedProduct(response.data.data)
-  console.log(selectedProduct)
-} catch (error) {
-  console.log(error)
-}
-
+    return productObject;
   }
+
+  const handleAddProduct = async () => {
+    selectedBill.cartItems.push(filterByName(category, product));
+   selectedBill.subTotal += productObject.price
+
+   await axios.
+  };
+
+  const handleProductChange = (value) => {
+    setProduct(value);
+    console.log("product change", product);
+  };
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
@@ -258,43 +282,46 @@ try {
           </div>
         </Modal>
       )}
-      {
-        popModifyModal && (
-          <Modal
+      {popModifyModal && (
+        <Modal
           title=""
           width={400}
           pagination={false}
           visible={popModifyModal}
           onCancel={() => setPopModifyModal(false)}
-          footer={false}>
-
-
-      <Table dataSource={selectedBill.cartItems} columns={ModifyColumns} bordered />
-      <div style ={{display : 'flex', flexDirection: 'column'}}>
-      <Button onClick={()=>{setNewItem(true)}}>
+          footer={false}
+        >
+          <Table
+            dataSource={selectedBill.cartItems}
+            columns={ModifyColumns}
+            bordered
+          />
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {/** <Button onClick={()=>{setNewItem(true)}}>
   Ajouter un autre Article
-</Button>
-{newItem && (
+</Button>*/}
 
-<Select onChange={handleSelectChange}>
-{options.map((option) => (
-                  <Select.Option  key={option} value={option}>
-                    {option}
+            <Select onChange={handleSelectChange}>
+              {options.map((option) => (
+                <Select.Option key={option} value={option}>
+                  {option}
+                </Select.Option>
+              ))}
+            </Select>
+
+            {category && (
+              <Select onChange={handleProductChange}>
+                {category.map((option) => (
+                  <Select.Option key={option._id} value={option.name}>
+                    {option.name}
                   </Select.Option>
                 ))}
-
-
-  </Select>
-)}
-
-        
-      </div>
-
-
-
-          </Modal>
-        )
-      }
+              </Select>
+            )}
+            <Button onClick={() => handleAddProduct()}>Modifier facture</Button>
+          </div>
+        </Modal>
+      )}
       <span style={{ textDecoration: "underline", fontSize: "25px" }}>
         Recette de jour: {todaysBills}Dt
       </span>
