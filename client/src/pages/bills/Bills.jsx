@@ -50,6 +50,8 @@ const Bills = () => {
   const [product, setProduct] = useState(null);
   const [subTotal,setSubTotal]=useState(0)
 
+
+  console.log('aakakak',selectedBill)
   const getAllBills = async () => {
     try {
       dispatch({
@@ -171,7 +173,7 @@ const Bills = () => {
     selectedBill.cartItems.push(filterByName(category, product));
    selectedBill.subTotal += productObject.price
 
-   await axios.
+   await axios.put('https://forever-pos-zz.onrender.com/api/products/getSelectProducts',selectedBill)
   };
 
   const handleProductChange = (value) => {
