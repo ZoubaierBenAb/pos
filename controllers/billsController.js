@@ -66,13 +66,23 @@ export const getBillsCreatedToday = async (req,res)=>{
 
 }
 
-export const updateBill = async(req,res)=>{
-try {
-  await Bills.findOneAndUpdate({_id : req.body._id}, req.body, {new: true})
-res.status(200).json({message : 'bill updated successfully'})
-} catch (error) {
-  res.status(400).send(error);
-  console.log(error);
-}
+export const updateBill = async (req, res) => {
+  try {
+    // Validate input data if needed
 
-}
+    const updatedBill = await Bills.findOneAndUpdate(
+      { _id: req.body._id },
+      req.body,
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedBill) {
+      return res.status(404).json({ message: 'Bill not found' });
+    }
+
+    res.status(200).json({ message: 'Bill updated successfully', updatedBill });
+  } catch (error) {
+    console.error('Error updating bill:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};

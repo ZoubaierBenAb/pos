@@ -1,3 +1,4 @@
+import Bills from "../models/billsModel.js"
 import Product from "../models/productModel.js"
 import products from "./data.js"
 
@@ -48,3 +49,12 @@ export const updateProductsKey = async () => {
   }
 
  }
+
+ export const deleteBillDocuments = async () => {
+  try {
+    await Bills.deleteMany({});
+    console.log('All documents deleted successfully');
+  } catch (err) {
+    console.error(err);
+  }
+};

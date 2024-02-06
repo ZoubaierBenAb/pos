@@ -9,7 +9,7 @@ import userRouter from "./routes/userRoutes.js";
 import billsRouter from "./routes/billsRoutes.js";
 import products from "./utils/data.js";
 import Product from "./models/productModel.js";
-import { categoryKeys, insertProdcuts ,updateProductsKey} from "./utils/insert.js";
+import { categoryKeys, deleteBillDocuments, insertProdcuts ,updateProductsKey} from "./utils/insert.js";
 //require('colors');
 
 dotenv.config();

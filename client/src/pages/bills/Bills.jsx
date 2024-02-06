@@ -37,6 +37,8 @@ const options = [
   "Panini",
 ];
 
+const quantityArray = [1,2,3,4,5]
+
 const Bills = () => {
   const componentRef = useRef();
   const dispatch = useDispatch();
@@ -48,8 +50,8 @@ const Bills = () => {
   const [productObject, setProductObject] = useState(null);
   const [category, setCategory] = useState(null);
   const [product, setProduct] = useState(null);
-  const [subTotal,setSubTotal]=useState(0)
 
+const [quantity,setQuantity]=useState(1)
 
   console.log('aakakak',selectedBill)
   const getAllBills = async () => {
@@ -72,8 +74,9 @@ const Bills = () => {
       console.log(error);
     }
   };
-
   useEffect(() => {
+console.log('aadwwqq',selectedBill)
+   
     const handletodaysBills = async () => {
       const { data } = await axios.get(
         "https://forever-pos-zz.onrender.com/api/bills/getTodaysBills"
@@ -110,7 +113,7 @@ const Bills = () => {
             onClick={() => {
               setSelectedBill(record);
               setPopModifyModal(true);
-              console.log(selectedBill.cartItems);
+          
             }}
           />
         </div>
@@ -153,33 +156,48 @@ const Bills = () => {
       );
 
       setCategory(response.data.data);
-      console.log("products", response.data.data);
+   
     } catch (error) {
       console.log(error);
     }
   };
+  const handleQuantityChange = (value) => {
+    setQuantity(value);
+  };
 
-  function filterByName(products, filterName) {
+  function filterByName(products, filterName, quantity) {
     const filteredProduct = products.find((drink) =>
       drink.name.toLowerCase().includes(filterName.toLowerCase())
-    
     );
+
+    // Check if the product is found
+    if (filteredProduct) {
+        // Add quantity key to the filtered product object
+        filteredProduct.quantity = quantity;
+    }
+
+    // Update state asynchronously
     setProductObject(filteredProduct);
 
-    return productObject;
-  }
+    return filteredProduct; // Return the filtered product directly
+}
+
 
   const handleAddProduct = async () => {
-    selectedBill.cartItems.push(filterByName(category, product));
-   selectedBill.subTotal += productObject.price
+    const filteredProduct = filterByName(category, product,quantity);
 
-   await axios.put('https://forever-pos-zz.onrender.com/api/products/getSelectProducts',selectedBill)
+    if (filteredProduct) {
+      selectedBill.cartItems.push(filteredProduct);
+      selectedBill.subTotal += filteredProduct.price * filteredProduct.quantity;
+
+      await axios.put('https://forever-pos-zz.onrender.com/api/bills/updateBill', selectedBill);
+    }
   };
-
   const handleProductChange = (value) => {
     setProduct(value);
-    console.log("product change", product);
   };
+
+  
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
@@ -199,7 +217,7 @@ const Bills = () => {
           width={400}
           pagination={false}
           visible={popModal}
-          onCancel={() => setPopModal(false)}
+          onCancel={() => {setPopModal(false);setSelectedBill(null)}}
           footer={false}
         >
           <div className="card" ref={componentRef}>
@@ -312,13 +330,24 @@ const Bills = () => {
             </Select>
 
             {category && (
-              <Select onChange={handleProductChange}>
+              <>
+              <Select style={{marginTop : '5px'}} onChange={handleProductChange}>
                 {category.map((option) => (
                   <Select.Option key={option._id} value={option.name}>
                     {option.name}
                   </Select.Option>
+                  
                 ))}
               </Select>
+<Select onChange={handleQuantityChange}>
+{quantityArray.map((el)=>(
+ <Select.Option key={el} value={el}>
+{el}
+ </Select.Option>
+))}
+ 
+</Select>
+              </>
             )}
             <Button onClick={() => handleAddProduct()}>Modifier facture</Button>
           </div>
