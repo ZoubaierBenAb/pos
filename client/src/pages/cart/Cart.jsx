@@ -48,21 +48,21 @@ const Cart = () => {
 
     const columns = [
         {
-            title: "Name",
+            title: "اسم المنتج",
             dataIndex: "name"
         },
         {
-            title: "Image",
+            title: "الصورة",
             dataIndex: "image",
             render:(image, record) => <img src={image} alt={record.name} height={60} width={60} />
         }, 
         {
-            title: "Price",
+            title: "السعر",
             dataIndex: "price",
         }
         , 
         {
-            title: "Quantity",
+            title: "الكمية",
             dataIndex: "_id",
             render:(id, record) => 
                 <div>
@@ -73,7 +73,7 @@ const Cart = () => {
         }
         , 
         {
-            title: "Action",
+            title: "حذف المنتج",
             dataIndex: "_id",
             render:(id, record) => <DeleteOutlined className='cart-action' onClick={() => handlerDelete(record)} />
         }
@@ -115,19 +115,19 @@ const Cart = () => {
       </Input>
       <Table dataSource={cartItems} columns={columns} bordered />
       <div className="subTotal">
-        <h2>Sub Total: <span>$ {(subTotal).toFixed(2)}</span></h2>
-        <Button onClick={() => setBillPopUp(true)} className='add-new'>Genere Facture</Button>
+        <h2>السعر الاجمالي <span>$ {(subTotal).toFixed(2)}</span></h2>
+        <Button onClick={() => setBillPopUp(true)} className='add-new'>انشاء الفاتورة</Button>
       </div>
       <Modal title="Create Invoice" visible={billPopUp} onCancel={() => setBillPopUp(false)} footer={false}>
         <Form layout='vertical' onFinish={handlerSubmit}>
             
           
             <div className="total">
-                <span>SubTotal: ${(subTotal.toFixed(2))}</span><br />
-                <h3>Total: ${subTotal.toFixed(2)}</h3>
+                <span>SubTotal: Dt{(subTotal.toFixed(2))}</span><br />
+                <h3>Total: Dt{subTotal.toFixed(2)}</h3>
             </div>
             <div className="form-btn-add">
-              <Button htmlType='submit' className='add-new'>Generer addition</Button>
+              <Button htmlType='submit' className='add-new'>تاكيد الفاتورة</Button>
             </div>  
         </Form>
       </Modal>

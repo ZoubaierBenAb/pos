@@ -39,13 +39,13 @@ const LayoutApp = ({children}) => {
         </div>
         <Menu theme="dark" mode="inline" defaultSelectedKeys={window.location.pathname}>
             <Menu.Item key='/' icon={<HomeOutlined />}>
-                <Link to="/">Home</Link>
+                <Link to="/">القائمة</Link>
             </Menu.Item>
             <Menu.Item key='/bills' icon={<MoneyCollectOutlined />}>
-                <Link to="/bills">Bills</Link>
+                <Link to="/bills">فاتورات</Link>
             </Menu.Item>
             <Menu.Item key="/products" icon={<HomeOutlined />}>
-                <Link to="/products">Products</Link>
+                <Link to="/products">المنتجات</Link>
             </Menu.Item>
            
             <Menu.Item key='/logout' icon={<LogoutOutlined />} onClick={() => {localStorage.removeItem("auth"); navigate("/login");}}>

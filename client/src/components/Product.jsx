@@ -22,7 +22,7 @@ const Product = ({product}) => {
     >
         <Meta title={product.name} description={`Dt${product.price}`} />
         <div className="product-btn">
-          <Button onClick={() => handlerToCart()}>Add To Cart</Button>
+          <Button onClick={() => handlerToCart()}>اضف</Button>
         </div>
     </Card>
   )

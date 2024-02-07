@@ -35,9 +35,11 @@ const options = [
   "Pizza",
   "Chicha",
   "Panini",
+  "Supplement",
+  'Libanais/Makloub'
 ];
 
-const quantityArray = [1,2,3,4,5]
+const quantityArray = [1, 2, 3, 4, 5];
 
 const Bills = () => {
   const componentRef = useRef();
@@ -51,9 +53,9 @@ const Bills = () => {
   const [category, setCategory] = useState(null);
   const [product, setProduct] = useState(null);
 
-const [quantity,setQuantity]=useState(1)
+  const [quantity, setQuantity] = useState(1);
 
-  console.log('aakakak',selectedBill)
+  console.log("aakakak", selectedBill);
   const getAllBills = async () => {
     try {
       dispatch({
@@ -75,8 +77,8 @@ const [quantity,setQuantity]=useState(1)
     }
   };
   useEffect(() => {
-console.log('aadwwqq',selectedBill)
-   
+    console.log("aadwwqq", selectedBill);
+
     const handletodaysBills = async () => {
       const { data } = await axios.get(
         "https://forever-pos-zz.onrender.com/api/bills/getTodaysBills"
@@ -96,15 +98,15 @@ console.log('aadwwqq',selectedBill)
     },
 
     {
-      title: "Total ",
+      title: "الحاصل ",
       dataIndex: "subTotal",
     },
     {
-      title: "Table",
+      title: "رقم الطاولة",
       dataIndex: "table",
     },
     {
-      title: "Modify",
+      title: "تعديل الفاتورة",
       dataIndex: "_id",
       render: (id, record) => (
         <div>
@@ -113,14 +115,13 @@ console.log('aadwwqq',selectedBill)
             onClick={() => {
               setSelectedBill(record);
               setPopModifyModal(true);
-          
             }}
           />
         </div>
       ),
     },
     {
-      title: "Action",
+      title: "الفاتورة",
       dataIndex: "_id",
       render: (id, record) => (
         <div>
@@ -156,7 +157,6 @@ console.log('aadwwqq',selectedBill)
       );
 
       setCategory(response.data.data);
-   
     } catch (error) {
       console.log(error);
     }
@@ -172,32 +172,33 @@ console.log('aadwwqq',selectedBill)
 
     // Check if the product is found
     if (filteredProduct) {
-        // Add quantity key to the filtered product object
-        filteredProduct.quantity = quantity;
+      // Add quantity key to the filtered product object
+      filteredProduct.quantity = quantity;
     }
 
     // Update state asynchronously
     setProductObject(filteredProduct);
 
     return filteredProduct; // Return the filtered product directly
-}
-
+  }
 
   const handleAddProduct = async () => {
-    const filteredProduct = filterByName(category, product,quantity);
+    const filteredProduct = filterByName(category, product, quantity);
 
     if (filteredProduct) {
       selectedBill.cartItems.push(filteredProduct);
       selectedBill.subTotal += filteredProduct.price * filteredProduct.quantity;
 
-      await axios.put('https://forever-pos-zz.onrender.com/api/bills/updateBill', selectedBill);
+      await axios.put(
+        "https://forever-pos-zz.onrender.com/api/bills/updateBill",
+        selectedBill
+      );
     }
   };
   const handleProductChange = (value) => {
     setProduct(value);
   };
 
-  
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
@@ -217,7 +218,10 @@ console.log('aadwwqq',selectedBill)
           width={400}
           pagination={false}
           visible={popModal}
-          onCancel={() => {setPopModal(false);setSelectedBill(null)}}
+          onCancel={() => {
+            setPopModal(false);
+            setSelectedBill(null);
+          }}
           footer={false}
         >
           <div className="card" ref={componentRef}>
@@ -297,7 +301,7 @@ console.log('aadwwqq',selectedBill)
           </div>
           <div className="bills-btn-add">
             <Button onClick={handlePrint} htmlType="submit" className="add-new">
-              Generer Facture
+              طباعة الفاتورة
             </Button>
           </div>
         </Modal>
@@ -320,7 +324,7 @@ console.log('aadwwqq',selectedBill)
             {/** <Button onClick={()=>{setNewItem(true)}}>
   Ajouter un autre Article
 </Button>*/}
-
+  <p>انقر لاختيار فئة للاضافة</p>
             <Select onChange={handleSelectChange}>
               {options.map((option) => (
                 <Select.Option key={option} value={option}>
@@ -331,25 +335,30 @@ console.log('aadwwqq',selectedBill)
 
             {category && (
               <>
-              <Select style={{marginTop : '5px'}} onChange={handleProductChange}>
-                {category.map((option) => (
-                  <Select.Option key={option._id} value={option.name}>
-                    {option.name}
-                  </Select.Option>
-                  
-                ))}
-              </Select>
-<Select onChange={handleQuantityChange}>
-{quantityArray.map((el)=>(
- <Select.Option key={el} value={el}>
-{el}
- </Select.Option>
-))}
- 
-</Select>
+                <Select
+                  style={{ marginTop: "5px" }}
+                  onChange={handleProductChange}
+                >
+                
+                  {category.map((option) => (
+                    <>
+                    
+                    <Select.Option defaultValue="default" key={option._id} value={option.name}>
+                      {option.name}
+                    </Select.Option>
+                    </>
+                  ))}
+                </Select>
+                <Select onChange={handleQuantityChange}>
+                  {quantityArray.map((el) => (
+                    <Select.Option key={el} value={el}>
+                      {el}
+                    </Select.Option>
+                  ))}
+                </Select>
               </>
             )}
-            <Button onClick={() => handleAddProduct()}>Modifier facture</Button>
+            <Button onClick={() => handleAddProduct()}>انقر لتعديل الفاتورة</Button>
           </div>
         </Modal>
       )}

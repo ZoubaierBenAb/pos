@@ -34,6 +34,8 @@ const options = [
   "Pizza",
   "Chicha",
   "Panini",
+  'Supplement',
+  'Libanais/Makloub'
 ];
 const Products = () => {
   const dispatch = useDispatch();
@@ -111,22 +113,22 @@ const Products = () => {
 
   const columns = [
     {
-      title: "Name",
+      title: "اسم المنتج",
       dataIndex: "name",
     },
     {
-      title: "Image",
+      title: "الصورة",
       dataIndex: "image",
       render: (image, record) => (
         <img src={image} alt={record.name} height={60} width={60} />
       ),
     },
     {
-      title: "Price",
+      title: "السعر",
       dataIndex: "price",
     },
     {
-      title: "Action",
+      title: "حذف او تعديل المنتج",
       dataIndex: "_id",
       render: (id, record) => (
         <div>
@@ -200,12 +202,12 @@ const Products = () => {
       <h2>All Products </h2>
       <Input
         prefix={<SearchOutlined />}
-        placeholder="Search by Name"
+        placeholder="ابحث عن المنتج"
         onChange={(e) => handleSearch(e.target.value)}
         style={{ marginBottom: 16, width: 200 }}
       />
       <Button className="add-new" onClick={() => setPopModal(true)}>
-        Add New
+        اضف منتج جديد
       </Button>
       <Table dataSource={filteredProductData} columns={columns} bordered />
 

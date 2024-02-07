@@ -117,6 +117,14 @@ imageUrl : 'https://delitraiteur.lu/wp-content/uploads/2022/02/panini-1.png'
 {
   name : 'Plat',
   imageUrl :'https://cdn.chefclub.tools/uploads/recipes/cover-thumbnail/fdb607b8-98ad-441b-9a63-e5d2ba83b656.jpg'
+},
+{
+  name : 'Supplement',
+  imageUrl : 'https://static.vecteezy.com/ti/photos-gratuite/p2/6372521-supplement-mot-sur-bouton-isole-gratuit-photo.jpg'
+},
+{
+  name : 'Libanais/Makloub',
+  imageUrl : 'https://i.ytimg.com/vi/iAd7gCNLA7M/maxresdefault.jpg'
 }
   
 
