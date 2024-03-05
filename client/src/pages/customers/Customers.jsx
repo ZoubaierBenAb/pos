@@ -14,7 +14,7 @@ const Customers = () => {
       dispatch({
         type: "SHOW_LOADING",
       });
-      const {data} = await axios.get('https://forever-pos-zz.onrender.com/api/bills/getbills');
+      const {data} = await axios.get('https://pos-ktdt.onrender.com/api/bills/getbills');
       setBillsData(data);
       dispatch({
         type: "HIDE_LOADING",

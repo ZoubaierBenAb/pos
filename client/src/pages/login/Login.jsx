@@ -16,7 +16,7 @@ const Login = () => {
       dispatch({
         type: "SHOW_LOADING",
       });
-      const res = await axios.post('https://forever-pos-zz.onrender.com/api/users/login', value);
+      const res = await axios.post('https://pos-ktdt.onrender.com/api/users/login', value);
       dispatch({
         type: "HIDE_LOADING",
       });

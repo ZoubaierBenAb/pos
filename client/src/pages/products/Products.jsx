@@ -56,7 +56,7 @@ const Products = () => {
         type: "SHOW_LOADING",
       });
       const { data } = await axios.get(
-        "https://forever-pos-zz.onrender.com/api/products/getproducts"
+        "https://pos-ktdt.onrender.com/api/products/getproducts"
       );
       setProductData(data);
       dispatch({
@@ -88,7 +88,7 @@ const Products = () => {
         type: "SHOW_LOADING",
       });
   
-      await axios.post("https://forever-pos-zz.onrender.com/api/products/deleteproducts", {
+      await axios.post("https://pos-ktdt.onrender.com/api/products/deleteproducts", {
         productId: record._id,
       });
   
@@ -156,7 +156,7 @@ const Products = () => {
           type: "SHOW_LOADING",
         });
         const res = await axios.post(
-          "https://forever-pos-zz.onrender.com/api/products/addproducts",
+          "https://pos-ktdt.onrender.com/api/products/addproducts",
           value
         );
         message.success("Product Added Successfully!");
@@ -177,7 +177,7 @@ const Products = () => {
         dispatch({
           type: "SHOW_LOADING",
         });
-        await axios.put("https://forever-pos-zz.onrender.com/api/products/updateproducts", {
+        await axios.put("https://pos-ktdt.onrender.com/api/products/updateproducts", {
           ...value,
           productId: editProduct._id,
         });

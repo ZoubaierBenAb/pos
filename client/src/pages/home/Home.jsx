@@ -137,7 +137,7 @@ imageUrl : 'https://delitraiteur.lu/wp-content/uploads/2022/02/panini-1.png'
           type: "SHOW_LOADING",
         });
         const { data } = await axios.get(
-          "https://forever-pos-zz.onrender.com/api/products/getproducts"
+          "https://pos-ktdt.onrender.com/api/products/getproducts"
         );
         setProductData(data);
         dispatch({

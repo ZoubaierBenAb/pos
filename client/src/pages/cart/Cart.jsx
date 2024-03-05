@@ -99,7 +99,7 @@ const Cart = () => {
                 totalAmount: Number((Number(subTotal) + Number(((subTotal / 100) * 10).toFixed(2))).toFixed(2)),
                 userId: JSON.parse(localStorage.getItem("auth"))._id
             }
-            await axios.post("https://forever-pos-zz.onrender.com/api/bills/addbills", newObject);
+            await axios.post("https://pos-ktdt.onrender.com/api/bills/addbills", newObject);
             message.success("Bill Generated!");
             initisilizeCart()
             navigate("/bills");

@@ -62,7 +62,7 @@ const Bills = () => {
         type: "SHOW_LOADING",
       });
       const { data } = await axios.get(
-        "https://forever-pos-zz.onrender.com/api/bills/getbills"
+        "https://pos-ktdt.onrender.com/api/bills/getbills"
       );
       setBillsData(data);
       dispatch({
@@ -81,7 +81,7 @@ const Bills = () => {
 
     const handletodaysBills = async () => {
       const { data } = await axios.get(
-        "https://forever-pos-zz.onrender.com/api/bills/getTodaysBills"
+        "https://pos-ktdt.onrender.com/api/bills/getTodaysBills"
       );
       setTodaysBills(data.todaySubTotal);
       console.log("data", todaysBills);
@@ -153,7 +153,7 @@ const Bills = () => {
     try {
       const category = value;
       const response = await axios.get(
-        `https://forever-pos-zz.onrender.com/api/products/getSelectProducts/${category}`
+        `https://pos-ktdt.onrender.com/api/products/getSelectProducts/${category}`
       );
 
       setCategory(response.data.data);
@@ -190,7 +190,7 @@ const Bills = () => {
       selectedBill.subTotal += filteredProduct.price * filteredProduct.quantity;
 
       await axios.put(
-        "https://forever-pos-zz.onrender.com/api/bills/updateBill",
+        "https://pos-ktdt.onrender.com/api/bills/updateBill",
         selectedBill
       );
     }

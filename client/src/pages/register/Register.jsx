@@ -15,7 +15,7 @@ const Register = () => {
       dispatch({
         type: "SHOW_LOADING",
       });
-      await axios.post('https://forever-pos-zz.onrender.com/api/users/register', value);
+      await axios.post('https://pos-ktdt.onrender.com/api/users/register', value);
       message.success("Register Successfully!");
       navigate("/login");
       dispatch({
